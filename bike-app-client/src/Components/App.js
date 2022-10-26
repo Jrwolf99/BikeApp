@@ -8,7 +8,6 @@ import { Table } from "./Table/Table";
 
 //styles
 const StyledApp = styled.div``;
-
 const StyledBody = styled.div`
   margin: 0.4rem;
 `;
@@ -38,10 +37,10 @@ function App() {
 
       <StyledApp>
         <SelectTable
-          handleSelectTableSubmission={handleSelectTableSubmission}
           tableTitle={tableTitle}
+          handleSelectTableSubmission={handleSelectTableSubmission}
         />
-        {tableInfo.length > 0 && (
+        {
           <StyledBody>
             <button onClick={() => setIsEdittingRow(true)}>Add a Row</button>
             <Table
@@ -50,7 +49,7 @@ function App() {
               tableInfo={tableInfo}
             />
           </StyledBody>
-        )}
+        }
       </StyledApp>
     </>
   );

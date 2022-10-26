@@ -47,6 +47,9 @@ export const Modal = ({ setIsEdittingRow, columnTitles, handleRowAdd }) => {
 
     const [rowToAdd, setRowToAdd] = useState({});
 
+
+
+
     return (
         <StyledModal>
             <button onClick={() => setIsEdittingRow(false)}>Close</button>

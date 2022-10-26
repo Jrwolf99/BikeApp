@@ -57,7 +57,7 @@ export const Table = ({ tableInfo, handleRowDelete, handleRowEdit }) => {
                             <tr key={rowArr[0]}>
                                 <td>
                                     <button onClick={handleRowEdit}>Edit</button>
-                                    <button onClick={handleRowDelete}>Delete</button>
+                                    <button onClick={() => handleRowDelete(rowArr[0])}>Delete</button>
                                 </td>
                                 {rowArr.map((element, index) => {
                                     return <td key={index}>{element}</td>

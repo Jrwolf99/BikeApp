@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { useTable } from '../../hooks/useTable';
 
 const StyledForm = styled.form`
   display: flex;
@@ -13,7 +14,8 @@ const StyledForm = styled.form`
 `;
 
 
-export const SelectTable = ({ handleSelectTableSubmission, tableTitle }) => {
+export const SelectTable = ({ tableTitle, handleSelectTableSubmission }) => {
+
 
     return (
         <StyledForm>

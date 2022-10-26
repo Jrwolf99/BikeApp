@@ -5,23 +5,33 @@ export const useTable = () => {
   const [tableInfo, setTableInfo] = useState([]);
   const [tableTitle, setTableTitle] = useState("");
 
-  const { fetchDBInfo } = useDataAccess();
+  const { getAllDBInfo, postDBInfo, deleteDBInfo, updateDBInfo } =
+    useDataAccess();
 
-  const handleSelectTableSubmission = (e) => {
-    e.preventDefault();
-    setTableTitle(e.target.value);
-    fetchDBInfo(e.target.value).then((data) =>
+  const refreshTable = (tableName) => {
+    getAllDBInfo(tableName).then((data) =>
       //setTableInfo to the array inside the response
       setTableInfo(Object.values(data)[0])
     );
   };
 
-  const handleRowDelete = () => {};
+  const handleSelectTableSubmission = (e) => {
+    e.preventDefault();
+    setTableTitle(e.target.value);
+    refreshTable(e.target.value);
+  };
+
+  const handleRowDelete = (rowID) => {
+    deleteDBInfo(tableTitle, rowID);
+    refreshTable(tableTitle);
+  };
 
   const handleRowEdit = () => {};
 
   const handleRowAdd = (rowToAdd) => {
     console.log(rowToAdd);
+    postDBInfo(tableTitle, rowToAdd);
+    refreshTable(tableTitle);
   };
 
   const getColumnTitles = (tableInfo) => {

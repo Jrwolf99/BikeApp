@@ -1,5 +1,5 @@
 export const useDataAccess = () => {
-  const fetchDBInfo = async (tableTitle) => {
+  const getAllDBInfo = async (tableTitle) => {
     console.log(tableTitle);
     const response = await fetch(`http://localhost:3000/${tableTitle}`);
     const tableInfo = await response.json();
@@ -7,5 +7,46 @@ export const useDataAccess = () => {
     return tableInfo;
   };
 
-  return { fetchDBInfo };
+  const postDBInfo = async (tableTitle, bodyToSend) => {
+    const response = await fetch(`http://localhost:3000/${tableTitle}`, {
+      method: "POST",
+      body: JSON.stringify(bodyToSend),
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+      },
+    });
+    const tableInfo = await response.json();
+    console.log("sent table info", tableInfo);
+    return tableInfo;
+  };
+
+  const deleteDBInfo = async (tableTitle, rowID) => {
+    const response = await fetch(
+      `http://localhost:3000/${tableTitle}/${rowID}`,
+      {
+        method: "DELETE",
+      }
+    );
+    const tableInfo = await response.json();
+    console.log("deleted tabled info", tableInfo);
+    return tableInfo;
+  };
+
+  const updateDBInfo = async (tableTitle, bodyToSend, rowID) => {
+    const response = await fetch(
+      `http://localhost:3000/${tableTitle}/${rowID}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(bodyToSend),
+        headers: {
+          "Content-type": "application/json; charset=utf-8",
+        },
+      }
+    );
+    const tableInfo = await response.json();
+    console.log("updated table info", tableInfo);
+    return tableInfo;
+  };
+
+  return { getAllDBInfo, postDBInfo, deleteDBInfo, updateDBInfo };
 };
