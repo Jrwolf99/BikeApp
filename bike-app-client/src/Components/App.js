@@ -1,53 +1,58 @@
 //imports
 import { useState } from "react";
 import styled from "styled-components";
-import { fetchSaleInfo } from "../utilities/fetchData";
+import { useTable } from "../hooks/useTable";
+import { Modal } from "./Modal/Modal";
+import { SelectTable } from "./SelectTable/SelectTable";
 import { Table } from "./Table/Table";
 
 //styles
 const StyledApp = styled.div``;
-const StyledForm = styled.form`
-  background-color: whitesmoke;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
 
-  width: 400px;
-  margin: auto;
-
-  padding: 1em;
-  border-radius: 5px;
+const StyledBody = styled.div`
+  margin: 0.4rem;
 `;
 
 function App() {
-  const [name, setName] = useState("");
-  const [saleInfo, setSaleInfo] = useState({});
+  const {
+    handleRowDelete,
+    handleRowEdit,
+    handleRowAdd,
+    handleSelectTableSubmission,
+    tableInfo,
+    tableTitle,
+    getColumnTitles,
+  } = useTable();
 
-  const handleFormSubmission = (e) => {
-    e.preventDefault();
-
-    fetchSaleInfo().then((data) => setSaleInfo(data));
-  };
+  const [isEdittingRow, setIsEdittingRow] = useState(false);
 
   return (
-    <StyledApp>
-      <StyledForm onSubmit={(e) => handleFormSubmission(e)}>
-        <label>
-          Test Name Input:
-          <input
-            type="text"
-            id="fname"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-        <button type="submit">submit</button>
-      </StyledForm>
+    <>
+      {isEdittingRow && (
+        <Modal
+          setIsEdittingRow={setIsEdittingRow}
+          columnTitles={getColumnTitles(tableInfo)}
+          handleRowAdd={handleRowAdd}
+        />
+      )}
 
-      <Table saleInfo={saleInfo} />
-    </StyledApp>
+      <StyledApp>
+        <SelectTable
+          handleSelectTableSubmission={handleSelectTableSubmission}
+          tableTitle={tableTitle}
+        />
+        {tableInfo.length > 0 && (
+          <StyledBody>
+            <button onClick={() => setIsEdittingRow(true)}>Add a Row</button>
+            <Table
+              handleRowDelete={handleRowDelete}
+              handleRowEdit={handleRowEdit}
+              tableInfo={tableInfo}
+            />
+          </StyledBody>
+        )}
+      </StyledApp>
+    </>
   );
 }
 
