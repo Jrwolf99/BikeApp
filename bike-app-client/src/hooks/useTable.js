@@ -46,5 +46,6 @@ export const useTable = () => {
     tableInfo,
     tableTitle,
     getColumnTitles,
+    refreshTable,
   };
 };

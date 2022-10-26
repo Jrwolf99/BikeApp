@@ -21,6 +21,7 @@ function App() {
     tableInfo,
     tableTitle,
     getColumnTitles,
+    refreshTable,
   } = useTable();
 
   const [isEdittingRow, setIsEdittingRow] = useState(false);
@@ -43,6 +44,9 @@ function App() {
         {
           <StyledBody>
             <button onClick={() => setIsEdittingRow(true)}>Add a Row</button>
+            <button onClick={() => refreshTable(tableTitle)}>
+              Refresh Table
+            </button>
             <Table
               handleRowDelete={handleRowDelete}
               handleRowEdit={handleRowEdit}
