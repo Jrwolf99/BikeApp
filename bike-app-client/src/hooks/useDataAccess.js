@@ -2,7 +2,7 @@ export const useDataAccess = () => {
   const getAllDBInfo = async (tableTitle) => {
     console.log(tableTitle);
     const response = await fetch(
-      `http://bikeapp-api-server.herokuapp.com/${tableTitle}`
+      `https://bikeapp-api-server.herokuapp.com/${tableTitle}`
     );
     const tableInfo = await response.json();
     console.log("retrieved table info", tableInfo);
@@ -11,7 +11,7 @@ export const useDataAccess = () => {
 
   const postDBInfo = async (tableTitle, bodyToSend) => {
     const response = await fetch(
-      `http://bikeapp-api-server.herokuapp.com/${tableTitle}`,
+      `https://bikeapp-api-server.herokuapp.com/${tableTitle}`,
       {
         method: "POST",
         body: JSON.stringify(bodyToSend),
@@ -27,7 +27,7 @@ export const useDataAccess = () => {
 
   const deleteDBInfo = async (tableTitle, rowID) => {
     const response = await fetch(
-      `http://bikeapp-api-server.herokuapp.com/${tableTitle}/${rowID}`,
+      `https://bikeapp-api-server.herokuapp.com/${tableTitle}/${rowID}`,
       {
         method: "DELETE",
       }
@@ -39,7 +39,7 @@ export const useDataAccess = () => {
 
   const updateDBInfo = async (tableTitle, bodyToSend, rowID) => {
     const response = await fetch(
-      `http://bikeapp-api-server.herokuapp.com/${tableTitle}/${rowID}`,
+      `https://bikeapp-api-server.herokuapp.com/${tableTitle}/${rowID}`,
       {
         method: "PATCH",
         body: JSON.stringify(bodyToSend),
