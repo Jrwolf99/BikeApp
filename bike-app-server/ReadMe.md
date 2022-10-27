@@ -11,6 +11,6 @@ TODO: NOTE: There is a copy of this server already running via Heroku. There is 
 
 - This server needs node to be able to be runned. Download the latest version [here](https://nodejs.org/en/download/).
 - To install the packages for the server to run, type ```npm i```.
-- TODO: To run the server, type node server.js.
+- TODO: To run the server, type npm start.
 
 
