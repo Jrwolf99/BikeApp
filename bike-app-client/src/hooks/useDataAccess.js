@@ -1,20 +1,25 @@
 export const useDataAccess = () => {
   const getAllDBInfo = async (tableTitle) => {
     console.log(tableTitle);
-    const response = await fetch(`http://localhost:3000/${tableTitle}`);
+    const response = await fetch(
+      `http://bikeapp-api-server.herokuapp.com/${tableTitle}`
+    );
     const tableInfo = await response.json();
     console.log("retrieved table info", tableInfo);
     return tableInfo;
   };
 
   const postDBInfo = async (tableTitle, bodyToSend) => {
-    const response = await fetch(`http://localhost:3000/${tableTitle}`, {
-      method: "POST",
-      body: JSON.stringify(bodyToSend),
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-      },
-    });
+    const response = await fetch(
+      `http://bikeapp-api-server.herokuapp.com/${tableTitle}`,
+      {
+        method: "POST",
+        body: JSON.stringify(bodyToSend),
+        headers: {
+          "Content-type": "application/json; charset=utf-8",
+        },
+      }
+    );
     const tableInfo = await response.json();
     console.log("sent table info", tableInfo);
     return tableInfo;
@@ -22,7 +27,7 @@ export const useDataAccess = () => {
 
   const deleteDBInfo = async (tableTitle, rowID) => {
     const response = await fetch(
-      `http://localhost:3000/${tableTitle}/${rowID}`,
+      `http://bikeapp-api-server.herokuapp.com/${tableTitle}/${rowID}`,
       {
         method: "DELETE",
       }
@@ -34,7 +39,7 @@ export const useDataAccess = () => {
 
   const updateDBInfo = async (tableTitle, bodyToSend, rowID) => {
     const response = await fetch(
-      `http://localhost:3000/${tableTitle}/${rowID}`,
+      `http://bikeapp-api-server.herokuapp.com/${tableTitle}/${rowID}`,
       {
         method: "PATCH",
         body: JSON.stringify(bodyToSend),
