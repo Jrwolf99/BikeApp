@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useTable } from '../../hooks/useTable';
+import { TableRow } from './TableRow';
 
 
 
@@ -27,7 +28,7 @@ th {
 `;
 
 
-export const Table = ({ tableInfo, handleRowDelete, handleRowEdit }) => {
+export const Table = ({ tableTitle, tableInfo, handleRowDelete, handleRowEdit }) => {
 
     const { getColumnTitles } = useTable();
     const labels = getColumnTitles(tableInfo);
@@ -36,7 +37,7 @@ export const Table = ({ tableInfo, handleRowDelete, handleRowEdit }) => {
         <StyledTable>
             <thead>
                 <tr>
-                    <th>Actions</th>
+                    {(tableTitle !== "sale/organized") && <th>Actions</th>}
                     {
                         labels.map((label) => {
                             return <th
@@ -52,18 +53,16 @@ export const Table = ({ tableInfo, handleRowDelete, handleRowEdit }) => {
 
                 {
                     tableInfo && tableInfo.map((row) => {
-                        const rowArr = Object.values(row);
+                        const rowVals = Object.values(row);
+                        const rowKeys = Object.keys(row);
                         return (
-                            <tr key={rowArr[0]}>
-                                <td>
-                                    <button onClick={handleRowEdit}>Edit</button>
-                                    <button onClick={() => handleRowDelete(rowArr[0])}>Delete</button>
-                                </td>
-                                {rowArr.map((element, index) => {
-                                    return <td key={index}>{element}</td>
-                                })
-                                }
-                            </tr>
+                            <TableRow
+                                key={rowVals[0]}
+                                tableTitle={tableTitle}
+                                rowVals={rowVals}
+                                rowKeys={rowKeys}
+                                handleRowDelete={handleRowDelete}
+                                handleRowEdit={handleRowEdit} />
                         );
                     })
                 }

@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import { useTable } from '../../hooks/useTable';
 
 const StyledForm = styled.form`
   display: flex;
@@ -16,13 +15,14 @@ const StyledForm = styled.form`
 
 export const SelectTable = ({ tableTitle, handleSelectTableSubmission }) => {
 
-
     return (
         <StyledForm>
             {tableTitle.length > 0 && (
-                <h2>
-                    {tableTitle.charAt(0).toUpperCase() + tableTitle.slice(1) + "s"}
-                </h2>
+                (tableTitle === "sale/organized") ? <h2>Sales Organized</h2>
+                    :
+                    <h2>
+                        {tableTitle.charAt(0).toUpperCase() + tableTitle.slice(1) + "s"}
+                    </h2>
             )}
             <label>
                 Choose a table to view:
@@ -38,11 +38,12 @@ export const SelectTable = ({ tableTitle, handleSelectTableSubmission }) => {
                         Salespersons
                     </option>
                     <option value="product">Products</option>
-                    {/* <option value="customer">Customers</option> */}
-                    {/* <option value="sale">Sales</option> */}
+                    <option value="customer">Customers</option>
+                    <option value="sale">Sales</option>
+                    <option value="sale/organized">Sales Organized</option>
                     {/* <option value="discount">Discounts</option> */}
                 </select>
             </label>
-        </StyledForm>
+        </StyledForm >
     )
 }

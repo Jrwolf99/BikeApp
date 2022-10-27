@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useAddMockData } from "./useAddMockData";
 import { useDataAccess } from "./useDataAccess";
 
 export const useTable = () => {
   const [tableInfo, setTableInfo] = useState([]);
   const [tableTitle, setTableTitle] = useState("");
+
+  const { getMockData } = useAddMockData();
 
   const { getAllDBInfo, postDBInfo, deleteDBInfo, updateDBInfo } =
     useDataAccess();
@@ -26,16 +29,27 @@ export const useTable = () => {
     refreshTable(tableTitle);
   };
 
-  const handleRowEdit = () => {};
+  const handleRowEdit = (rowToAdd, rowID) => {
+    updateDBInfo(tableTitle, rowToAdd, rowID);
+    refreshTable(tableTitle);
+  };
 
   const handleRowAdd = (rowToAdd) => {
-    console.log(rowToAdd);
     postDBInfo(tableTitle, rowToAdd);
     refreshTable(tableTitle);
   };
 
   const getColumnTitles = (tableInfo) => {
     return tableInfo[0] ? Object.keys(tableInfo[0]) : [];
+  };
+
+  const addMockData = () => {
+    const mockData = getMockData(tableTitle);
+    mockData &&
+      mockData.forEach((row) => {
+        handleRowAdd(row);
+      });
+    refreshTable(tableTitle);
   };
 
   return {
@@ -47,5 +61,6 @@ export const useTable = () => {
     tableTitle,
     getColumnTitles,
     refreshTable,
+    addMockData,
   };
 };

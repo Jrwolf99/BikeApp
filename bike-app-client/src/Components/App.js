@@ -22,6 +22,7 @@ function App() {
     tableTitle,
     getColumnTitles,
     refreshTable,
+    addMockData,
   } = useTable();
 
   const [isEdittingRow, setIsEdittingRow] = useState(false);
@@ -41,19 +42,26 @@ function App() {
           tableTitle={tableTitle}
           handleSelectTableSubmission={handleSelectTableSubmission}
         />
-        {
-          <StyledBody>
+        <StyledBody>
+          {tableTitle !== "sale/organized" && (
             <button onClick={() => setIsEdittingRow(true)}>Add a Row</button>
-            <button onClick={() => refreshTable(tableTitle)}>
-              Refresh Table
-            </button>
-            <Table
-              handleRowDelete={handleRowDelete}
-              handleRowEdit={handleRowEdit}
-              tableInfo={tableInfo}
-            />
-          </StyledBody>
-        }
+          )}
+
+          <button onClick={() => refreshTable(tableTitle)}>
+            Refresh Table
+          </button>
+
+          {tableTitle !== "sale/organized" && (
+            <button onClick={addMockData}>Add Mock Data</button>
+          )}
+
+          <Table
+            tableTitle={tableTitle}
+            handleRowDelete={handleRowDelete}
+            handleRowEdit={handleRowEdit}
+            tableInfo={tableInfo}
+          />
+        </StyledBody>
       </StyledApp>
     </>
   );

@@ -10,9 +10,13 @@ app.use(bodyParser.json());
 
 var salespersonRouter = require("./routes/salesperson");
 var productRouter = require("./routes/product");
+var customerRouter = require("./routes/customer");
+var saleRouter = require("./routes/sale");
 
 app.use("/salesperson", salespersonRouter);
 app.use("/product", productRouter);
+app.use("/customer", customerRouter);
+app.use("/sale", saleRouter);
 
 app.listen(port, () => {
   console.log(`listening on port ${port}...`);
