@@ -17,6 +17,8 @@ const updateRow = (tableName, primaryKeyTitle, rowID, rowValues) => {
 };
 
 //normal SQL:
+
+
 // SELECT
 // product_name, customer.first_name as "customer_first_name", customer.last_name as "customer_last_name",
 // sale_date, sale_price, salesperson.first_name as "salesperson_first_name", salesperson.last_name as "salesperson_first_name",
@@ -28,6 +30,12 @@ const updateRow = (tableName, primaryKeyTitle, rowID, rowValues) => {
 // ON sale.CustomerID = customer.CustomerID
 // JOIN salesperson
 // ON sale.SalespersonID = salesperson.SalespersonID;
+
+
+
+
+
+
 
 const getAllSalesOrganized = (tableName) => {
   return knex(tableName)
