@@ -6,4 +6,4 @@ This is full application with a client side and a server side. The client side i
 https://jrwolf-bikeapp.netlify.app/
 
 
-The Client is hosted through Netlify.
+The Client is hosted through Netlify. The server can be hosted, it is currently turned off. 
